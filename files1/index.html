@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aelrainyx の 小站</title>
+    <meta name="description" content="Aelrainyx 的个人小站，包含基本信息与社交媒体联系方式。">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/jpeg" href="/avatar.jpg">
+    <link rel="apple-touch-icon" href="/avatar.jpg">
+
+    <!-- Open Graph / Facebook, Discord 等 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Aelrainyx の 小站">
+    <meta property="og:description" content="Aelrainyx 的个人小站，包含基本信息与社交媒体联系方式。">
+    <meta property="og:image" content="/avatar.jpg">
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Aelrainyx の 小站">
+    <meta name="twitter:description" content="Aelrainyx 的个人小站，包含基本信息与社交媒体联系方式。">
+    <meta name="twitter:image" content="/avatar.jpg">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&amp;family=Noto+Serif+SC:wght@400;700&amp;display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #FFF0F5 0%, #E0F7FA 100%);
+        }
+        
+        .section-title {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', serif;
+            letter-spacing: -0.02em;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 1rem 1.25rem;
+            background-color: white;
+            border: 1px solid #e4e4e7;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #27251f;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .social-link:hover {
+            background-color: #fafafa;
+            border-color: #d4d4d8;
+            transform: translateY(-1px);
+        }
+
+        .nav-link {
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: #F48FB1;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f4f4f5;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .greeting {
+            font-size: 2.25rem;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #18181b;
+        }
+
+        .footer {
+            font-size: 0.875rem;
+            color: #71717a;
+        }
+
+        .accent-pink {
+            color: #F48FB1;
+        }
+
+        .app-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #18181b;
+            color: #f4f4f5;
+            padding: 10px 24px;
+            border-radius: 9999px;
+            font-size: 14px;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2);
+            z-index: 9999;
+            white-space: nowrap;
+            transition: opacity 0.25s ease;
+        }
+
+        /* ---- 装饰性增强：延续粉蓝主色调 ---- */
+
+        /* 选中文字时的高亮配色 */
+        ::selection {
+            background-color: #F8BBD9;
+            color: #18181b;
+        }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF0F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #F48FB1, #80DEEA);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #EC6FA0, #4DD0E1);
+        }
+        html {
+            scrollbar-color: #F48FB1 #FFF0F5;
+        }
+
+        /* 社交卡片悬停时左侧出现渐变色光条 */
+        .social-link {
+            position: relative;
+            overflow: hidden;
+        }
+        .social-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #F48FB1, #4DD0E1);
+            transform: scaleY(0);
+            transition: transform 0.25s ease;
+        }
+        .social-link:hover::before {
+            transform: scaleY(1);
+        }
+        .social-link:hover {
+            box-shadow: 0 8px 20px -8px rgba(244, 143, 177, 0.35);
+        }
+
+        /* 生日/邮箱等链接的下划线扫光效果 */
+        .info-row a {
+            position: relative;
+            text-decoration: none;
+        }
+
+        /* 头像外圈渐变光晕 */
+        header img {
+            transition: box-shadow 0.25s ease;
+        }
+        header img:hover {
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px #F48FB1;
+        }
+
+        /* 基本信息卡片的柔和顶部高光 */
+        .mb-16 > .bg-white {
+            position: relative;
+        }
+        .mb-16 > .bg-white::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(244, 143, 177, 0.06), rgba(77, 208, 225, 0.06));
+            pointer-events: none;
+        }
+
+        /* 页面整体淡入 */
+        body {
+            animation: fadeInUp 0.5s ease both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 键盘提示 kbd 的配色融入主题 */
+        kbd {
+            color: #00838F;
+        }
+
+        /* ---- 自定义鼠标光标：甘城猫猫 ---- */
+        body {
+            cursor: url('cursor-cat-normal.png') 4 0, auto;
+        }
+        a, button, .social-link, [onclick] {
+            cursor: url('cursor-cat-link.png') 4 0, pointer;
+        }
+    </style>
+</head>
+<body class="bg-[#FCE4EC] text-zinc-800">
+    <header class="border-b border-zinc-100 bg-transparent">
+        <div class="max-w-2xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-x-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                    <img src="avatar.jpg" 
+                         class="w-9 h-9 rounded-2xl object-cover ring-2 ring-white shadow-sm" 
+                         alt="Aelrainyx avatar">
+                    <div>
+                        <h1 class="text-2xl font-semibold tracking-tight">Aelrainyx の 小站</h1>
+                        <p class="text-[10px] text-zinc-400 -mt-1">个人小站</p>
+                    </div>
+                </div>
+                
+                <nav class="flex items-center gap-x-6 text-sm">
+                    <a href="#" class="nav-link text-zinc-600 hover:text-pink-500 font-medium">首页</a>
+                    <a href="#social" class="nav-link text-zinc-600 hover:text-pink-500 font-medium">社交</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto px-6 pt-12 pb-20">
+        <div class="mb-16">
+            <div class="greeting">
+                Ciallo～(∠・ω< )⌒☆<br>
+                我是 <span class="accent-pink">Aelrainyx</span>
+            </div>
+            <p class="mt-3 text-lg text-zinc-500 max-w-md">
+                欢迎来到我的小站。这里有我的基本信息和联系方式。
+            </p>
+        </div>
+
+        <div class="mb-16">
+            <h2 class="section-title text-xl font-semibold mb-6 flex items-center gap-x-2">
+                <span>基本信息</span>
+            </h2>
+            <div class="bg-white border border-zinc-100 rounded-3xl p-8 shadow-sm">
+                <div class="space-y-1">
+                    <div class="info-row">
+                        <div class="w-20 text-sm font-medium text-zinc-400 shrink-0">年龄</div>
+                        <div class="text-lg text-zinc-700">15</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="w-20 text-sm font-medium text-zinc-400 shrink-0">生日</div>
+                        <div>
+                            <a href="https://zh.wikipedia.org/wiki/6%E6%9C%8822%E6%97%A5" target="_blank"
+                               class="text-lg text-[#00BCD4] hover:underline decoration-[#B2EBF2] hover:decoration-[#00BCD4] transition-colors">
+                                08-20
+                            </a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="w-20 text-sm font-medium text-zinc-400 shrink-0">电子邮件</div>
+                        <div>
+                            <a id="email-link" href="#"
+                               class="inline-flex items-center gap-x-2 text-lg text-[#00BCD4] hover:text-[#00ACC1] transition-colors group">
+                                <span id="email-text">点击显示邮箱</span>
+                                <i class="fa-solid fa-envelope text-sm opacity-60 group-hover:opacity-100 transition-opacity"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="social" class="mb-8">
+            <h2 class="section-title text-xl font-semibold mb-2">社交媒体</h2>
+            <p class="text-zinc-500 mb-6">
+                在这里找到我
+                <span class="hidden md:inline text-xs text-zinc-400 ml-1">
+                    （按 <kbd class="px-1.5 py-0.5 rounded border border-zinc-200 bg-zinc-50 font-mono text-[11px]">/</kbd> 快速跳转到此处）
+                </span>
+            </p>
+            
+            <div class="grid grid-cols-1 gap-3">
+                <a href="https://x.com/Aelrainyx" target="_blank" class="social-link group">
+                    <div class="w-10 h-10 flex-shrink-0 bg-black text-white rounded-2xl flex items-center justify-center">
+                        <i class="fa-brands fa-x-twitter text-xl"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-medium">X / Twitter</div>
+                        <div class="text-sm text-zinc-400">@Aelrainyx • 推特主页</div>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-zinc-300 group-hover:text-zinc-400 transition-colors"></i>
+                </a>
+
+                <a href="https://t.me/Aelrainyx" target="_blank" class="social-link group">
+                    <div class="w-10 h-10 flex-shrink-0 bg-[#229ED9] text-white rounded-2xl flex items-center justify-center">
+                        <i class="fa-brands fa-telegram-plane text-xl"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-medium">Telegram</div>
+                        <div class="text-sm text-zinc-400">@Aelrainyx</div>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-zinc-300 group-hover:text-zinc-400 transition-colors"></i>
+                </a>
+
+                <div onclick="copyQQ()" class="social-link group">
+                    <div class="w-10 h-10 flex-shrink-0 bg-[#12B7F5] text-white rounded-2xl flex items-center justify-center">
+                        <i class="fa-brands fa-qq text-xl"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-medium">QQ</div>
+                        <div class="text-sm text-zinc-400">2369845728 <span class="text-xs">(点击复制)</span></div>
+                    </div>
+                    <i class="fa-solid fa-copy text-zinc-300 group-hover:text-pink-400 transition-colors"></i>
+                </div>
+            </div>
+            <p class="text-xs text-zinc-400 mt-4 px-1">点击卡片可直接跳转或复制 QQ 号</p>
+        </div>
+    </main>
+
+    <footer class="border-t border-[#F8BBD9]/40" style="background: linear-gradient(to top, rgba(176, 235, 242, 0.35), rgba(255, 240, 245, 0.35)); backdrop-filter: blur(8px);">
+        <div class="max-w-2xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-y-3 text-sm footer">
+                <div>© 2026 Aelrainyx，保留所有权利</div>
+                <div class="flex items-center gap-x-4 text-xs">
+                    <button onclick="window.scrollTo({top:0, behavior:'smooth'})"
+                            class="hover:text-zinc-600 transition-colors">返回顶部</button>
+                    <span class="text-zinc-300">·</span>
+                    <span>Aelrainyx の 小站</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function copyQQ() {
+            const qqNumber = '2369845728';
+            navigator.clipboard.writeText(qqNumber).then(() => {
+                const toast = document.createElement('div');
+                toast.className = 'app-toast';
+                toast.innerHTML = `已复制 QQ 号：<strong>${qqNumber}</strong>`;
+                document.body.appendChild(toast);
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 200);
+                }, 2300);
+            }).catch(() => {
+                prompt('请手动复制 QQ 号：', qqNumber);
+            });
+        }
+
+        // 邮箱地址拆分存储，避免被简单爬虫直接抓取明文地址
+        // 首次点击时才拼接出真实地址并触发 mailto
+        (function () {
+            const parts = ['Aelrainyx', 'Gmail.com'];
+            const emailLink = document.getElementById('email-link');
+            const emailText = document.getElementById('email-text');
+            if (!emailLink || !emailText) return;
+
+            let revealed = false;
+            emailLink.addEventListener('click', function (e) {
+                if (!revealed) {
+                    e.preventDefault();
+                    const address = parts.join('@');
+                    emailText.textContent = address;
+                    emailLink.href = 'mailto:' + address;
+                    revealed = true;
+                }
+            });
+        })();
+
+        window.onload = function() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault();
+                    const social = document.getElementById('social');
+                    if (social) social.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
